@@ -48,8 +48,19 @@ const pizzaData = [
 
 function App() {
     return <div>
+        {pizzaData.map(pizza => <Pizza name={pizza.name} ing={pizza.ingredients} price={pizza.price}
+                                       img={pizza.photoName}/>)}
     </div>
 }
+
+function Pizza(props) {
+    return <div>
+        <h2>{props.name}</h2>
+        <p>{props.price}</p>
+        <img src={props.img} alt={props.name}/>
+    </div>
+}
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<React.StrictMode><App/></React.StrictMode>);
