@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './index.css'
 
 const pizzaData = [
     {
@@ -47,20 +48,46 @@ const pizzaData = [
 ];
 
 function App() {
-    return <div>
-        {pizzaData.map(pizza => <Pizza name={pizza.name} ing={pizza.ingredients} price={pizza.price}
-                                       img={pizza.photoName}/>)}
+    return <div className='container'>
+        <Header/>
+        <Menu/>
+        <Footer/>
     </div>
 }
 
 function Pizza(props) {
-    return <div>
-        <h2>{props.name}</h2>
-        <p>{props.price}</p>
+    return <div className='pizza'>
         <img src={props.img} alt={props.name}/>
+        <div>
+            <h3>{props.name}</h3>
+            <p>{props.ing}</p>
+            <span>{props.price}</span>
+        </div>
     </div>
 }
 
+function Header() {
+    return <header className='header'>
+        <h1>Fast React Pizza Co.</h1>
+    </header>
+}
+
+function Menu() {
+    return <main className='menu'>
+        <h2>Our menu</h2>
+        {pizzaData.map((pizza, key) => <Pizza key={key} name={pizza.name} ing={pizza.ingredients} price={pizza.price}
+                                              img={pizza.photoName}/>)}
+    </main>
+}
+
+function Footer() {
+    const hour = new Date().getHours();
+    const openHour = 12;
+    const closeHour = 22;
+    const isOpen = hour >= openHour && hour <= closeHour;
+    console.log(isOpen)
+    return <footer className='footer'>{new Date().toLocaleTimeString()} We're currently open</footer>
+}
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<React.StrictMode><App/></React.StrictMode>);
