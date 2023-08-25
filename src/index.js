@@ -57,11 +57,11 @@ function App() {
 
 function Pizza(props) {
     return <div className='pizza'>
-        <img src={props.img} alt={props.name}/>
+        <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name}/>
         <div>
-            <h3>{props.name}</h3>
-            <p>{props.ing}</p>
-            <span>{props.price}</span>
+            <h3>{props.pizzaObj.name}</h3>
+            <p>{props.pizzaObj.ingredients}</p>
+            <span>{props.pizzaObj.price}</span>
         </div>
     </div>
 }
@@ -75,8 +75,9 @@ function Header() {
 function Menu() {
     return <main className='menu'>
         <h2>Our menu</h2>
-        {pizzaData.map((pizza, key) => <Pizza key={key} name={pizza.name} ing={pizza.ingredients} price={pizza.price}
-                                              img={pizza.photoName}/>)}
+        <ul className='pizzas'>
+            {pizzaData.map((pizza, key) => <Pizza key={key} pizzaObj={pizza}/>)}
+        </ul>
     </main>
 }
 
